@@ -6,6 +6,9 @@ export default makeStyles((theme) => ({
     textAlign: "center",
     fontSize: 16,
     height: "100vh",
-    // padding: 32,
+    maxWidth: "975px",
+    // maxWidth: "1440px",
+    justifyContent: "center",
+    margin: "auto",
   },
 }));

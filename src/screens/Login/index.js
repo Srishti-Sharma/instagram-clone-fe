@@ -14,7 +14,9 @@ export default function Login() {
         }}
       >
         <Grid item mb={4} mt={4}>
-          <Typography variant="h5">Instagram</Typography>
+          <Typography variant="h5" className={styles.title}>
+            Instagram
+          </Typography>
         </Grid>
         <Grid container flexDirection={"column"} spacing={2} pl={5} pr={5}>
           <Grid item>

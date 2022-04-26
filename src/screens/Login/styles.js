@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+// import GrandHotelRegular from "public/fonts/GrandHotel-Regular";
 
 export default makeStyles((theme) => ({
   root: {
@@ -12,5 +13,8 @@ export default makeStyles((theme) => ({
   container: {
     border: "1px solid #EFEFEF",
     backgroundColor: "#FFFFFF",
+  },
+  title: {
+    fontFamily: "GrandHotelRegular",
   },
 }));

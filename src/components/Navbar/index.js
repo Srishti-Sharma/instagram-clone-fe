@@ -13,7 +13,7 @@ const Navbar = () => {
   let styles = useStyles();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="inherit">
+      <AppBar className={styles.main} position="static" color="inherit">
         <Toolbar>
           <Grid
             container

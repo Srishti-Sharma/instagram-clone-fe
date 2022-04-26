@@ -1,9 +1,42 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
 
 export default function SignUp() {
   const styles = useStyles();
+
+  const [name, setName] = useState("");
+  // const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [mobileNumber, setMobileNumber] = useState("");
+
+  const handleSubmit = () => {
+    fetch(`http://localhost:5000/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+      mode: "cors",
+    })
+      .then((res) => {
+        console.log("res ", res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log({ data });
+        if (data) return data;
+      })
+      .catch((err) => console.log({ err }));
+  };
+
   return (
     <div className={styles.root}>
       <Box
@@ -21,40 +54,41 @@ export default function SignUp() {
             <TextField
               size="small"
               fullWidth
-              id="outlined-basic"
+              // id="outlined-basic"
               label="Full Name"
-              type={"text"}
+              type="text"
+              required
+              onChange={(e) => setName(e.target.value)}
             />
           </Grid>
           <Grid item>
             <TextField
               size="small"
               fullWidth
-              id="outlined-basic"
-              label="Mobile Number"
-              type={"number"}
+              // id="outlined-basic"
+              label="Email"
+              type="text"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Grid>
           <Grid item>
             <TextField
               size="small"
               fullWidth
-              id="outlined-basic"
-              label="Username"
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              size="small"
-              fullWidth
-              id="outlined-basic"
+              // id="outlined-basic"
               label="Password"
-              type={"password"}
+              type="password"
+              required
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Grid>
-
           <Grid item mt={2} mb={2}>
-            <Button color="primary" variant="contained" fullWidth>
+            <Button
+              color="primary"
+              variant="contained"
+              fullWidth
+              onClick={() => handleSubmit()}
+            >
               SignUp
             </Button>
           </Grid>
