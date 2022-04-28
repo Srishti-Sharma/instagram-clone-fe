@@ -1,4 +1,4 @@
-export const POSTS = [
+export const MY_POSTS = [
   {
     url: "https://images.unsplash.com/photo-1649624963958-554d32e28c55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDMwfFM0TUtMQXNCQjc0fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
     title: "Wanderer <3",

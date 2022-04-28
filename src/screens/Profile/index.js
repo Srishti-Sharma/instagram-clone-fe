@@ -1,5 +1,5 @@
 import { Button, Grid, Typography } from "@mui/material";
-import { POSTS } from "./dummy";
+import { MY_POSTS } from "./dummy";
 import useStyles from "./styles";
 
 export default function Profile() {
@@ -83,7 +83,7 @@ export default function Profile() {
 
       {/* user-gallery */}
       <Grid container justifyContent={"space-evenly"} pt={2} pb={2} mt={5}>
-        {POSTS.map((post) => {
+        {MY_POSTS.map((post) => {
           return (
             <div className={styles.gridContainer}>
               <img className={styles.gallery} src={post.url} />

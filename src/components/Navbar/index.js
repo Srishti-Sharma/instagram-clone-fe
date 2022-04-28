@@ -30,7 +30,7 @@ const Navbar = () => {
               <Grid item xs={2}>
                 <Link
                   href={"/"}
-                  labelText="Home"
+                  labeltext="Home"
                   className={styles.removeUnderline}
                 >
                   <Typography
@@ -55,7 +55,7 @@ const Navbar = () => {
               <Grid item xs={1}>
                 <Link
                   href={"/profile"}
-                  labelText="Profile"
+                  labeltext="Profile"
                   className={styles.removeUnderline}
                 >
                   <Typography variant="body">Profile</Typography>
@@ -64,7 +64,7 @@ const Navbar = () => {
               <Grid item xs={2}>
                 <Link
                   href={"/login"}
-                  labelText="Login"
+                  labeltext="Login"
                   className={styles.removeUnderline}
                 >
                   <Typography variant="body">Login</Typography>
@@ -73,7 +73,7 @@ const Navbar = () => {
               <Grid item xs={1}>
                 <Link
                   href={"/signup"}
-                  labelText="Signup"
+                  labeltext="Signup"
                   className={styles.removeUnderline}
                 >
                   <Typography variant="body">Signup</Typography>
