@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
     backgroundColor: "#FAFAFA",
     textAlign: "center",
     fontSize: 16,
-    height: "100vh",
+    minHeight: "100vh",
     maxWidth: "975px",
     // maxWidth: "1440px",
     justifyContent: "center",

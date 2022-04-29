@@ -16,9 +16,14 @@ import { red } from "@mui/material/colors";
 
 import { PUBLIC_POSTS } from "./dummy";
 import useStyles from "./styles";
+import { Favorite, FavoriteBorder, Share } from "@material-ui/icons";
+import { useState } from "react";
 
 export const CardPost = ({ data }) => {
   const styles = useStyles();
+
+  const [isFavorite, setFavorite] = useState(false);
+
   return data.map((item) => {
     const { username, posts } = item;
     return (
@@ -47,39 +52,40 @@ export const CardPost = ({ data }) => {
         <CardMedia
           component="img"
           height="auto"
-          style={{ maxHeight: "450px" }}
+          className={styles.cardMedia}
           src={posts.url}
           alt="green iguana"
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+        <CardActions>
+          <IconButton
+            aria-label="like"
+            onClick={() => {
+              setFavorite(!isFavorite);
+            }}
+          >
+            {isFavorite ? <Favorite color="secondary" /> : <FavoriteBorder />}
+          </IconButton>
+          <IconButton aria-label="share">
+            <Share />
+          </IconButton>
+        </CardActions>
+        <CardContent className={styles.cardContent}>
+          <Typography variant="h5" component="div">
             {posts.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {posts.description}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     );
   });
 };
 
 export default function Home() {
+  const styles = useStyles();
   return (
-    <div
-      style={{
-        display: "flex",
-        flex: 1,
-        margin: "10px",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-      }}
-    >
+    <div className={styles.container}>
       <CardPost data={PUBLIC_POSTS} />
     </div>
   );
