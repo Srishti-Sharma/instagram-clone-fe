@@ -52,13 +52,22 @@ const Navbar = () => {
                 justifyContent: "flex-end",
               }}
             >
-              <Grid item xs={1}>
+              <Grid item xs={2}>
                 <Link
                   href={"/profile"}
                   labeltext="Profile"
                   className={styles.removeUnderline}
                 >
                   <Typography variant="body">Profile</Typography>
+                </Link>
+              </Grid>
+              <Grid item xs={2}>
+                <Link
+                  href={"/create"}
+                  labeltext="Create"
+                  className={styles.removeUnderline}
+                >
+                  <Typography variant="body">Create</Typography>
                 </Link>
               </Grid>
               <Grid item xs={2}>
@@ -70,7 +79,7 @@ const Navbar = () => {
                   <Typography variant="body">Login</Typography>
                 </Link>
               </Grid>
-              <Grid item xs={1}>
+              <Grid item xs={2}>
                 <Link
                   href={"/signup"}
                   labeltext="Signup"

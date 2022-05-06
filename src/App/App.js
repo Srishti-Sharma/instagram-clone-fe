@@ -6,6 +6,7 @@ import Profile from "../screens/Profile";
 import useStyles from "./styles";
 import Login from "../screens/Login";
 import Signup from "../screens/Signup";
+import Create from "../screens/CreatePosts";
 
 function App() {
   const styles = useStyles();
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/create" element={<Create />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
