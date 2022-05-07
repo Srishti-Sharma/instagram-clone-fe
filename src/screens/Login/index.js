@@ -1,11 +1,92 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Snackbar,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { validateEmail } from "../utils";
 import useStyles from "./styles";
 
 export default function Login() {
   const styles = useStyles();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [toast, setToast] = useState({
+    type: "info",
+    message: "",
+    open: false,
+  });
+
+  const handleLogin = () => {
+    let isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      setToast({
+        open: true,
+        message: "Email is not valid",
+        type: "error",
+      });
+      return;
+    }
+    fetch("http://localhost:5000/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+      mode: "cors",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.error) {
+          setToast({
+            open: true,
+            message: data.error,
+            type: "error",
+          });
+        } else if (data?.token) {
+          setToast({
+            open: true,
+            message: "Signedin successfully",
+            type: "success",
+          });
+          navigate("/");
+        }
+      })
+      .catch((err) =>
+        setToast({
+          open: true,
+          message: err,
+          type: "error",
+        })
+      );
+  };
+
+  const handleClose = () =>
+    setToast({
+      open: false,
+    });
+
   return (
     <div className={styles.root}>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={toast.open}
+      >
+        <Alert onClose={handleClose} severity={toast.type}>
+          {toast.message}
+        </Alert>
+      </Snackbar>
       <Box
         className={styles.container}
         sx={{
@@ -14,7 +95,9 @@ export default function Login() {
         }}
       >
         <Grid item mb={4} mt={4}>
-          <Typography variant="h5">Instagram</Typography>
+          <Typography variant="h5" className={styles.title}>
+            Instagram
+          </Typography>
         </Grid>
         <Grid container flexDirection={"column"} spacing={2} pl={5} pr={5}>
           <Grid item>
@@ -22,7 +105,9 @@ export default function Login() {
               size="small"
               fullWidth
               id="outlined-basic"
-              label="Username"
+              label="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Grid>
           <Grid item>
@@ -32,11 +117,18 @@ export default function Login() {
               id="outlined-basic"
               label="Password"
               type={"password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Grid>
 
           <Grid item mt={2} mb={2}>
-            <Button color="primary" variant="contained" fullWidth>
+            <Button
+              color="primary"
+              variant="contained"
+              fullWidth
+              onClick={() => handleLogin()}
+            >
               Login
             </Button>
           </Grid>

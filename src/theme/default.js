@@ -1,3 +1,5 @@
+import GrandHotelRegular from "../../public/assets/fonts/GrandHotel-Regular";
+
 const base = {
   palette: {
     type: "light",
@@ -155,6 +157,7 @@ const base = {
       fontSize: 8,
     },
     fontFamily: [
+      GrandHotelRegular,
       larsseitRegular.fontFamily,
       "Roboto",
       '"Helvetica Neue"',
