@@ -72,7 +72,7 @@ const Navbar = () => {
               </Grid>
               <Grid item xs={2}>
                 <Link
-                  href={"/login"}
+                  href={"/signin"}
                   labeltext="Login"
                   className={styles.removeUnderline}
                 >

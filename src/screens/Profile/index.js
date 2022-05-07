@@ -62,7 +62,6 @@ export default function Profile() {
           </Grid>
           <Grid item container>
             {bio.split("\n").map((bioText) => {
-              console.log({ bioText });
               return (
                 <>
                   <Typography
