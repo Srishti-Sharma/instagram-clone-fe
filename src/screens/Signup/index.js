@@ -25,7 +25,6 @@ export default function SignUp() {
     message: "",
     open: false,
   });
-  const [loading, setLoading] = useState("");
 
   const handleSubmit = () => {
     let isValidEmail = validateEmail(email);
@@ -37,7 +36,7 @@ export default function SignUp() {
       });
       return;
     }
-    fetch(`http://localhost:5000/signup`, {
+    fetch(`/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

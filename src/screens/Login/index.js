@@ -34,7 +34,7 @@ export default function Login() {
       });
       return;
     }
-    fetch("http://localhost:5000/signin", {
+    fetch("/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,6 +55,8 @@ export default function Login() {
             type: "error",
           });
         } else if (data?.token) {
+          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
           setToast({
             open: true,
             message: "Signedin successfully",
