@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardMedia,
   IconButton,
-  Button,
   Typography,
 } from "@mui/material";
 
@@ -16,21 +15,39 @@ import { red } from "@mui/material/colors";
 import { PUBLIC_POSTS } from "./dummy";
 import useStyles from "./styles";
 import { Favorite, FavoriteBorder, Share } from "@material-ui/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const CardPost = ({ data }) => {
+export const CardPost = ({}) => {
   const styles = useStyles();
 
   const [isFavorite, setFavorite] = useState(false);
+  const [posts, setPosts] = useState([]);
 
-  return data.map((item) => {
-    const { username, posts } = item;
+  //  fetch all-posts
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    fetch("/allposts", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data.posts);
+      })
+      .catch((err) => err);
+  }, []);
+
+  return posts?.map((item, index) => {
+    const { postedBy, description, title, photo } = item;
+    const { name, _id } = postedBy;
     return (
       <Card
         className={styles.cardSpace}
         sx={{ maxWidth: 470 }}
         variant="outlined"
-        key={username}
+        key={_id + index}
       >
         <CardHeader
           avatar={
@@ -43,8 +60,8 @@ export const CardPost = ({ data }) => {
               <MoreVertIcon />
             </IconButton>
           }
-          title={username}
-          subheader={posts.date}
+          title={name}
+          subheader={posts?.date ? posts?.date : "please add a date"}
           titleTypographyProps={{ textAlign: "start" }}
           subheaderTypographyProps={{ textAlign: "start" }}
         />
@@ -52,8 +69,8 @@ export const CardPost = ({ data }) => {
           component="img"
           height="auto"
           className={styles.cardMedia}
-          src={posts.url}
-          alt="green iguana"
+          src={photo !== "no photo" && photo}
+          alt={photo === "no photo" ? "No Image" : "Photo"}
         />
         <CardActions>
           <IconButton
@@ -70,10 +87,10 @@ export const CardPost = ({ data }) => {
         </CardActions>
         <CardContent className={styles.cardContent}>
           <Typography variant="h5" component="div">
-            {posts.title}
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {posts.description}
+            {description}
           </Typography>
         </CardContent>
       </Card>
