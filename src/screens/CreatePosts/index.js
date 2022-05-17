@@ -181,7 +181,6 @@ const Create = () => {
                       type="file"
                       style={{ display: "none" }}
                       onChange={(e) => {
-                        console.log("e ", e.target.files);
                         setFiles([...files, ...e.target.files]);
                       }}
                     />

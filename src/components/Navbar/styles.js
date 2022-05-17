@@ -7,6 +7,10 @@ export default makeStyles((theme) => ({
   removeUnderline: {
     textDecoration: "none !important",
   },
+  logoutButton: {
+    textDecoration: "none !important",
+    cursor: "pointer",
+  },
   spacing: {
     marginRight: "10px",
     backgroundColor: "thistle",

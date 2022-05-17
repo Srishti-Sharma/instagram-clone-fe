@@ -7,14 +7,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import CustomContext from "../../context";
 import { validateEmail } from "../utils";
 import useStyles from "./styles";
 
 export default function Login() {
   const styles = useStyles();
   const navigate = useNavigate();
+  const { state, dispatch } = useContext(CustomContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -57,6 +59,7 @@ export default function Login() {
         } else if (data?.token) {
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
+          dispatch({ type: "USER", payload: data.user });
           setToast({
             open: true,
             message: "Signedin successfully",

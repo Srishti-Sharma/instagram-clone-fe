@@ -15,6 +15,7 @@ const styles = makeStyles(() => ({
   },
   cardMedia: {
     maxHeight: "450px",
+    minWidth: "470px",
   },
   cardContent: {
     textAlign: "start",
